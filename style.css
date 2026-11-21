@@ -233,6 +233,7 @@ h3 a:hover { color: var(--burgundy); }
 .experience-dates { color: var(--muted); font-size: .94rem; }
 footer { background: var(--paper); border-top: 1px solid var(--rule); }
 .footer-inner { align-items: center; padding-block: 2.7rem; }
+.last-updated { margin: .35rem 0 0; color: var(--muted); font-size: .875rem; }
 footer h2 { font-size: 2rem; }
 .email { color: var(--burgundy); font-size: 1.06rem; }
 @media (max-width: 850px) {
