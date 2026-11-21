@@ -165,8 +165,11 @@ nav a:hover, .resources a:hover { color: var(--burgundy); text-decoration: under
   gap: clamp(1.25rem, 3vw, 2.5rem);
   padding-top: 1.5rem;
 }
-.direction-preview { display: block; border-radius: .55rem; overflow: hidden; background: #272526; }
-.direction-preview video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.direction-preview, .publication-image { position: relative; display: block; aspect-ratio: 16 / 9; background: #272526; }
+.direction-preview { border-radius: .55rem; overflow: hidden; }
+.direction-preview img, .publication-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.direction-preview video, .publication-image video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; }
+video.is-playing { opacity: 1; }
 .direction-card h3 { margin: 1rem 0 0; }
 .direction-card abbr { text-decoration: none; }
 .direction-card .resources a[aria-current="true"] { text-decoration-thickness: .16em; text-underline-offset: .18em; }
@@ -197,18 +200,6 @@ h2 { margin: 0; font: 400 clamp(2rem, 3.5vw, 3rem)/1.16 var(--serif); letter-spa
 }
 .publication:last-child { border-bottom: 0; padding-bottom: 0; }
 .publication-figure { margin: 0; }
-.publication-image { position: relative; display: block; background: #272526; }
-.film-cover { position: absolute; inset: 0; pointer-events: none; }
-.film-cover img { display: block; width: 100%; height: 100%; object-fit: contain; background-size: cover; }
-.publication-image .has-frames + .film-cover { visibility: hidden; }
-.direction-preview noscript img, .publication-image noscript img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.publication-image video {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-}
 h3 { margin: .4rem 0 .65rem; font: 400 clamp(1.45rem, 2vw, 1.85rem)/1.2 var(--serif); letter-spacing: -.035em; }
 h3 a { text-decoration: none; }
 h3 a:hover { color: var(--burgundy); }

@@ -1,110 +1,112 @@
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const connection = navigator.connection;
+const videos = Array.from(document.querySelectorAll("video[data-src]"));
+const visible = new Set();
+let active = null;
+let timer;
+let fallbackPoster;
+let usingFallback = false;
 
-for (const card of document.querySelectorAll(".direction-card")) {
-  const preview = card.querySelector(".direction-preview");
-  const reel = preview.querySelector("video");
-  const projects = card.querySelectorAll(".resources a");
-  const seconds = Number(reel.dataset.projectSeconds);
-  let active = 0;
-
-  function syncProject() {
-    const index = Math.min(Math.floor(reel.currentTime / seconds), projects.length - 1);
-    if (index === active) return;
-    projects[active].removeAttribute("aria-current");
-    const project = projects[index];
-    project.setAttribute("aria-current", "true");
-    preview.href = project.href;
-    preview.setAttribute("aria-label", "View " + project.textContent.trim());
-    active = index;
-  }
-
-  reel.addEventListener("timeupdate", syncProject);
-  preview.addEventListener("click", syncProject);
+function allowPlayback() {
+  return !document.hidden && !reducedMotion.matches && !connection?.saveData;
 }
 
-const videos = document.querySelectorAll("video[data-src]");
-const visibleVideos = new Set();
+function showProject(video, index) {
+  const card = video.closest(".direction-card");
+  if (!card) return;
+  const links = card.querySelectorAll(".resources a");
+  const project = links[index];
+  if (project.hasAttribute("aria-current")) return;
+  for (const link of links) link.removeAttribute("aria-current");
+  project.setAttribute("aria-current", "true");
+  const preview = video.parentElement;
+  preview.href = project.href;
+  preview.setAttribute("aria-label", "View " + project.textContent.trim());
+}
 
-for (const video of document.querySelectorAll("video[data-preview-start]")) {
-  // Open on the same action as the animated cover. The project link opens the full film.
-  video.addEventListener("loadedmetadata", () => {
-    const start = Number(video.dataset.previewStart);
-    if (start < video.duration) video.currentTime = start;
-  }, { once: true });
+function stopPreview() {
+  clearTimeout(timer);
+  if (!active) return;
+  active.pause();
+  active.classList.remove("is-playing");
+  if (fallbackPoster) {
+    active.previousElementSibling.src = fallbackPoster;
+    fallbackPoster = null;
+  }
+  usingFallback = false;
+  showProject(active, 0);
+  active = null;
+}
 
-  function revealFilm() {
-    if (!video.paused && !video.seeking && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-      video.classList.add("has-frames");
+function playPreview(video) {
+  stopPreview();
+  if (!video || !visible.has(video) || !allowPlayback()) return;
+  active = video;
+  if (!video.hasAttribute("src")) video.src = video.dataset.src;
+  if (video.currentTime > 0) video.currentTime = 0;
+  video.play().catch(() => {
+    if (active !== video || !video.paused || !allowPlayback()) return;
+    usingFallback = true;
+    // Browsers that require a gesture can still animate the selected publication.
+    if (video.dataset.fallback) {
+      const poster = video.previousElementSibling;
+      fallbackPoster = poster.getAttribute("src");
+      poster.src = video.dataset.fallback;
     }
-  }
-
-  if ("requestVideoFrameCallback" in video) {
-    video.addEventListener("playing", () => video.requestVideoFrameCallback(revealFilm));
-  } else {
-    video.addEventListener("timeupdate", revealFilm);
-  }
-  for (const event of ["waiting", "seeking", "pause", "error", "emptied"]) {
-    video.addEventListener(event, () => video.classList.remove("has-frames"));
-  }
+    timer = setTimeout(advance, 4000);
+  });
 }
 
-function preparePreview(video) {
-  video.poster = video.dataset.poster;
-  const cover = video.parentElement.querySelector("img[data-motion]");
-  if (cover) {
-    // Keep the embedded still painted while the browser swaps image sources.
-    cover.style.backgroundImage = 'url("' + cover.getAttribute("src") + '")';
-    cover.src = cover.dataset.motion;
-  }
-}
-
-function updatePlayback(video) {
-  if (!visibleVideos.has(video) || reducedMotion.matches || document.hidden) {
-    video.pause();
+function advance() {
+  const choices = videos.filter(video => visible.has(video));
+  if (choices.length === 1 && usingFallback && allowPlayback()) {
+    timer = setTimeout(advance, 4000);
     return;
   }
-
-  if (!video.hasAttribute("src")) {
-    video.src = video.dataset.src;
-  }
-  video.play().catch(() => video.classList.remove("has-frames"));
+  const index = choices.indexOf(active);
+  playPreview(choices.length ? choices[(index + 1) % choices.length] : null);
 }
 
-function refreshVisible() {
-  visibleVideos.forEach(updatePlayback);
+function refresh() {
+  if (allowPlayback() && visible.has(active)) return;
+  stopPreview();
+  // A fast scroll past a thumbnail should not start a download.
+  if (visible.size && allowPlayback()) timer = setTimeout(advance, 160);
 }
-
-reducedMotion.addEventListener("change", refreshVisible);
-document.addEventListener("visibilitychange", refreshVisible);
 
 if ("IntersectionObserver" in window) {
-  const posters = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        preparePreview(entry.target);
-        posters.unobserve(entry.target);
-      }
-    }
-  }, { rootMargin: "220px 0px" });
-
-  const playback = new IntersectionObserver(entries => {
+  const observer = new IntersectionObserver(entries => {
     for (const { target, intersectionRatio } of entries) {
-      if (intersectionRatio >= 0.15) visibleVideos.add(target);
-      else visibleVideos.delete(target);
-      updatePlayback(target);
+      if (intersectionRatio >= 0.5) visible.add(target);
+      else visible.delete(target);
     }
-  }, { threshold: [0, 0.15] });
+    refresh();
+  }, { threshold: [0, 0.5] });
 
   for (const video of videos) {
-    posters.observe(video);
-    playback.observe(video);
+    observer.observe(video);
+    video.addEventListener("playing", () => {
+      if (active === video && !video.paused) video.classList.add("is-playing");
+    });
+    video.addEventListener("ended", () => {
+      if (active === video) advance();
+    });
+    if (video.dataset.projectSeconds) {
+      video.addEventListener("timeupdate", () => {
+        if (active === video) showProject(video, video.currentTime >= Number(video.dataset.projectSeconds) ? 1 : 0);
+      });
+    }
+    const prefer = () => {
+      if (active !== video && visible.has(video) && allowPlayback()) playPreview(video);
+    };
+    video.parentElement.addEventListener("focus", prefer);
+    video.parentElement.addEventListener("pointerenter", event => {
+      if (event.pointerType === "mouse") prefer();
+    });
   }
-} else {
-  for (const video of videos) {
-    preparePreview(video);
-    visibleVideos.add(video);
-  }
-  refreshVisible();
+  reducedMotion.addEventListener("change", refresh);
+  connection?.addEventListener("change", refresh);
+  document.addEventListener("visibilitychange", refresh);
 }
 
 function loadVisitBadge() {
