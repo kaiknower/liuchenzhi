@@ -106,3 +106,16 @@ if ("IntersectionObserver" in window) {
   }
   refreshVisible();
 }
+
+function loadVisitBadge() {
+  const link = document.querySelector(".visit-count");
+  if (!link || location.protocol === "file:") return;
+  const badge = new Image();
+  badge.alt = "Homepage visits";
+  badge.referrerPolicy = "no-referrer";
+  badge.addEventListener("load", () => link.replaceChildren(badge), { once: true });
+  badge.src = link.dataset.badge;
+}
+
+if (document.readyState === "complete") loadVisitBadge();
+else window.addEventListener("load", loadVisitBadge, { once: true });
