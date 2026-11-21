@@ -31,7 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-underline-offset: .24em; }
-a:focus-visible, summary:focus-visible {
+a:focus-visible {
   outline: 3px solid var(--burgundy);
   outline-offset: 5px;
 }
@@ -204,9 +204,6 @@ h3 a:hover { color: var(--burgundy); }
 .authors { color: var(--muted); font-size: .94rem; line-height: 1.55; margin: 0; }
 .authors strong { font-weight: 700; color: var(--ink); }
 .contribution { display: block; font-size: .8rem; margin-top: .12rem; }
-.author-details summary { width: fit-content; cursor: pointer; }
-.author-details p { margin: .25rem 0 0; }
-.more-authors { color: var(--burgundy); white-space: nowrap; font-size: .86rem; font-weight: 600; padding-left: .15rem; }
 .description { color: #49454a; margin: .75rem 0 .2rem; }
 .resources { display: flex; flex-wrap: wrap; gap: 0 1.4rem; }
 .resources a { color: var(--burgundy); font-weight: 650; }
