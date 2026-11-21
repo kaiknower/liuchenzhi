@@ -1,5 +1,27 @@
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+for (const card of document.querySelectorAll(".direction-card")) {
+  const preview = card.querySelector(".direction-preview");
+  const reel = preview.querySelector("video");
+  const projects = card.querySelectorAll(".resources a");
+  const seconds = Number(reel.dataset.projectSeconds);
+  let active = 0;
+
+  function syncProject() {
+    const index = Math.min(Math.floor(reel.currentTime / seconds), projects.length - 1);
+    if (index === active) return;
+    projects[active].removeAttribute("aria-current");
+    const project = projects[index];
+    project.setAttribute("aria-current", "true");
+    preview.href = project.href;
+    preview.setAttribute("aria-label", "View " + project.textContent.trim());
+    active = index;
+  }
+
+  reel.addEventListener("timeupdate", syncProject);
+  preview.addEventListener("click", syncProject);
+}
+
 for (const video of document.querySelectorAll("video[muted][loop]")) {
   let visible = !("IntersectionObserver" in window);
 

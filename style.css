@@ -173,6 +173,7 @@ nav a:hover, .resources a:hover { color: var(--burgundy); text-decoration: under
 .direction-preview video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .direction-card h3 { margin: 1rem 0 0; }
 .direction-card abbr { text-decoration: none; }
+.direction-card .resources a[aria-current="true"] { text-decoration-thickness: .16em; text-underline-offset: .18em; }
 .news-list { list-style: none; margin: 0; padding: .55rem 0 0; }
 .news-list li {
   display: grid;
