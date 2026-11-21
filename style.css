@@ -161,7 +161,13 @@ nav a:hover, .resources a:hover { color: var(--burgundy); text-decoration: under
   background: #e6dace;
 }
 .portrait picture, .portrait img { display: block; width: 100%; height: 100%; }
-.portrait img { object-fit: cover; object-position: 52% 45%; }
+.portrait picture { overflow: hidden; }
+.portrait img {
+  object-fit: cover;
+  object-position: 52% 45%;
+  transform: scale(1.15);
+  transform-origin: right 40%;
+}
 .research, .news { padding-top: 2.85rem; }
 .direction-grid {
   display: grid;
