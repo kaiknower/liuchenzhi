@@ -24,10 +24,38 @@ for (const card of document.querySelectorAll(".direction-card")) {
 
 const videos = document.querySelectorAll("video[data-src]");
 const visibleVideos = new Set();
-let pageReady = document.readyState === "complete";
+
+for (const video of document.querySelectorAll("video[data-preview-start]")) {
+  // Open on the same action as the animated cover. The project link opens the full film.
+  video.addEventListener("loadedmetadata", () => {
+    const start = Number(video.dataset.previewStart);
+    if (start < video.duration) video.currentTime = start;
+  }, { once: true });
+
+  function revealFilm() {
+    if (!video.paused && !video.seeking && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      video.classList.add("has-frames");
+    }
+  }
+
+  if ("requestVideoFrameCallback" in video) {
+    video.addEventListener("playing", () => video.requestVideoFrameCallback(revealFilm));
+  } else {
+    video.addEventListener("timeupdate", revealFilm);
+  }
+  for (const event of ["waiting", "seeking", "pause", "error", "emptied"]) {
+    video.addEventListener(event, () => video.classList.remove("has-frames"));
+  }
+}
+
+function preparePreview(video) {
+  video.poster = video.dataset.poster;
+  const cover = video.parentElement.querySelector("img[data-motion]");
+  if (cover) cover.src = cover.dataset.motion;
+}
 
 function updatePlayback(video) {
-  if (!pageReady || !visibleVideos.has(video) || reducedMotion.matches || document.hidden) {
+  if (!visibleVideos.has(video) || reducedMotion.matches || document.hidden) {
     video.pause();
     return;
   }
@@ -35,17 +63,13 @@ function updatePlayback(video) {
   if (!video.hasAttribute("src")) {
     video.src = video.dataset.src;
   }
-  video.play().catch(() => {}); // Keep the poster if the browser blocks autoplay.
+  video.play().catch(() => video.classList.remove("has-frames"));
 }
 
 function refreshVisible() {
   visibleVideos.forEach(updatePlayback);
 }
 
-window.addEventListener("load", () => {
-  pageReady = true;
-  requestAnimationFrame(refreshVisible);
-}, { once: true });
 reducedMotion.addEventListener("change", refreshVisible);
 document.addEventListener("visibilitychange", refreshVisible);
 
@@ -53,11 +77,11 @@ if ("IntersectionObserver" in window) {
   const posters = new IntersectionObserver(entries => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        entry.target.poster = entry.target.dataset.poster;
+        preparePreview(entry.target);
         posters.unobserve(entry.target);
       }
     }
-  }, { rootMargin: "96px 0px" });
+  }, { rootMargin: "220px 0px" });
 
   const playback = new IntersectionObserver(entries => {
     for (const { target, intersectionRatio } of entries) {
@@ -73,7 +97,7 @@ if ("IntersectionObserver" in window) {
   }
 } else {
   for (const video of videos) {
-    video.poster = video.dataset.poster;
+    preparePreview(video);
     visibleVideos.add(video);
   }
   refreshVisible();
