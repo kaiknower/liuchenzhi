@@ -22,28 +22,59 @@ for (const card of document.querySelectorAll(".direction-card")) {
   preview.addEventListener("click", syncProject);
 }
 
-for (const video of document.querySelectorAll("video[muted][loop]")) {
-  let visible = !("IntersectionObserver" in window);
+const videos = document.querySelectorAll("video[data-src]");
+const visibleVideos = new Set();
+let pageReady = document.readyState === "complete";
 
-  function updatePlayback() {
-    if (visible && !reducedMotion.matches && !document.hidden) {
-      // A browser that blocks autoplay can still display the poster.
-      video.play().catch(() => {});
-    } else {
-      video.pause();
+function updatePlayback(video) {
+  if (!pageReady || !visibleVideos.has(video) || reducedMotion.matches || document.hidden) {
+    video.pause();
+    return;
+  }
+
+  if (!video.hasAttribute("src")) {
+    video.src = video.dataset.src;
+  }
+  video.play().catch(() => {}); // Keep the poster if the browser blocks autoplay.
+}
+
+function refreshVisible() {
+  visibleVideos.forEach(updatePlayback);
+}
+
+window.addEventListener("load", () => {
+  pageReady = true;
+  requestAnimationFrame(refreshVisible);
+}, { once: true });
+reducedMotion.addEventListener("change", refreshVisible);
+document.addEventListener("visibilitychange", refreshVisible);
+
+if ("IntersectionObserver" in window) {
+  const posters = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.poster = entry.target.dataset.poster;
+        posters.unobserve(entry.target);
+      }
     }
-  }
+  }, { rootMargin: "96px 0px" });
 
-  reducedMotion.addEventListener("change", updatePlayback);
-  document.addEventListener("visibilitychange", updatePlayback);
+  const playback = new IntersectionObserver(entries => {
+    for (const { target, intersectionRatio } of entries) {
+      if (intersectionRatio >= 0.15) visibleVideos.add(target);
+      else visibleVideos.delete(target);
+      updatePlayback(target);
+    }
+  }, { threshold: [0, 0.15] });
 
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.intersectionRatio >= 0.15;
-      updatePlayback();
-    }, { threshold: [0, 0.15] });
-    observer.observe(video);
-  } else {
-    updatePlayback();
+  for (const video of videos) {
+    posters.observe(video);
+    playback.observe(video);
   }
+} else {
+  for (const video of videos) {
+    video.poster = video.dataset.poster;
+    visibleVideos.add(video);
+  }
+  refreshVisible();
 }
