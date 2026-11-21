@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfaf7">
+  <title>Chenzhi Liu | Robotics &amp; Embodied AI</title>
+  <meta name="description" content="Chenzhi Liu studies robot learning, mobile manipulation, and visual navigation. He will begin his PhD at the University of Hong Kong on January 1, 2027.">
+  <link rel="icon" href="assets/fox-transparent.png" type="image/png" sizes="56x56">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+  <a class="skip" href="#about">Skip to content</a>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <a class="brand" href="#top" aria-label="Chenzhi Liu, home">
+        <img class="brand-icon" src="assets/fox-transparent.png" width="56" height="56" alt=""><span>Chenzhi Liu</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="intro" id="about" aria-labelledby="profile-name">
+      <div class="wrap intro-grid">
+        <div class="bio">
+          <p class="subject">Embodied AI &amp; robot learning</p>
+          <h1 class="signature" id="profile-name"><img src="assets/signature.png" alt="Liu Chenzhi" width="1881" height="836"></h1>
+          <div class="bio-text">
+            <p>Starting <time datetime="2027-01-01">January 1, 2027</time>, I will be a PhD student at <a href="https://www.hku.hk/">the University of Hong Kong</a>, advised by <a href="https://ece.hku.hk/people/xjqi/">Prof. Xiaojuan Qi</a>.</p>
+            <p>I study how robots use what they have seen and done to decide what to do next. My work spans mobile manipulation, world-action models, and visual navigation.</p>
+          </div>
+          <div class="profile-links" aria-label="Research profiles">
+            <a class="scholar" href="https://scholar.google.com/citations?user=D7RZ5kYAAAAJ&amp;hl=en">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5zM6 11v5c3.4 3.2 8.6 3.2 12 0v-5M22 9v6"/></svg>Google Scholar
+            </a>
+            <a href="https://github.com/kaiknower">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.1 1.4-4.1-2-6-2.4M15 22v-3.5c0-1 .1-1.6-.5-2.3 3.1-.35 6.3-1.5 6.3-6.8 0-1.5-.5-2.7-1.4-3.6.15-.36.6-1.8-.13-3.55 0 0-1.17-.37-3.82 1.4a13.4 13.4 0 0 0-6.96 0C5.84 1.88 4.67 2.25 4.67 2.25c-.73 1.76-.27 3.19-.14 3.55a5.1 5.1 0 0 0-1.4 3.6c0 5.27 3.2 6.45 6.26 6.8-.57.59-.64 1.36-.64 2.3V22"/></svg>GitHub
+            </a>
+          </div>
+        </div>
+        <div class="portrait">
+          <img src="assets/chenzhi-liu.webp" alt="Chenzhi Liu holding a gold folding fan" width="1000" height="1500" fetchpriority="high">
+        </div>
+      </div>
+    </section>
+    <section class="wrap news" id="news" aria-labelledby="news-title">
+      <div class="section-head"><h2 id="news-title">News</h2></div>
+      <ul class="news-list">
+        <li>
+          <time datetime="2026-10">Oct 2026</time>
+          <p>We released <a href="https://nvlabs.github.io/LongLive/Long-WAM/">Long-WAM</a>, a world-action model that uses a longer visual history for real-time robot control.</p>
+        </li>
+        <li>
+          <time datetime="2026-10">Oct 2026</time>
+          <p>Our CoRL 2026 paper <a href="https://kaiknower.github.io/mobiagent/">MobiAgent</a> is now on <a href="https://arxiv.org/abs/2610.03476">arXiv</a>. It shows how mobile robots can learn new skills from their own task attempts.</p>
+        </li>
+        <li>
+          <time datetime="2025-11">Nov 2025</time>
+          <p>We introduced <a href="https://arxiv.org/abs/2511.22609">MG-Nav</a>, which uses a sparse memory of previously visited places to guide a robot to a visual goal.</p>
+        </li>
+      </ul>
+    </section>
+    <section class="wrap publications" id="publications" aria-labelledby="publications-title">
+      <div class="section-head">
+        <h2 id="publications-title">Publications</h2>
+        <span class="year-range">2025–2026</span>
+      </div>
+      <article class="publication" id="mobiagent">
+        <figure class="publication-figure">
+          <a class="publication-image" href="https://kaiknower.github.io/mobiagent/#demo" aria-label="Watch the MobiAgent robot demonstrations">
+            <video src="assets/mobiagent-demo.mp4" poster="assets/mobiagent.webp" muted loop playsinline preload="none" aria-label="A mobile robot pouring blue particles into a cup, shown at three times real-time speed"></video>
+          </a>
+        </figure>
+        <div class="publication-copy">
+          <p class="venue">CoRL 2026</p>
+          <h3><a href="https://arxiv.org/abs/2610.03476">MobiAgent: Dual-Loop Recursive Policy Self-Improvement for Long-Horizon Mobile Manipulation</a></h3>
+          <p class="authors"><strong>Chenzhi Liu*</strong>, Yue Zhang*, Jiehong Lin*, Jianan Wang, Bo Wang, Zhongrui Wang, Xiaojuan Qi<span class="contribution">* Equal contribution</span></p>
+          <p class="description">One loop plans, executes, and recovers during a task. A second loop revisits those runs to discover and refine skills for future tasks.</p>
+          <div class="resources" aria-label="MobiAgent resources">
+            <a href="https://arxiv.org/abs/2610.03476">Paper</a><a href="https://kaiknower.github.io/mobiagent/">Project</a><a href="https://github.com/kaiknower/MobiAgent">Code</a><a href="https://huggingface.co/Liukaikai/MobiAgent">Model weights</a>
+          </div>
+        </div>
+      </article>
+      <article class="publication" id="long-wam">
+        <figure class="publication-figure">
+          <a class="publication-image" href="https://nvlabs.github.io/LongLive/Long-WAM/" aria-label="View the Long-WAM project and demonstrations">
+            <video src="assets/long-wam-demo.mp4" poster="assets/long-wam.webp" muted loop playsinline preload="none" aria-label="A Unitree G1 stacking colored cups on a moving conveyor"></video>
+          </a>
+        </figure>
+        <div class="publication-copy">
+          <p class="venue">arXiv · 2026</p>
+          <h3><a href="https://arxiv.org/abs/2610.10528">Long-WAM: Scaling the Context of World-Action Models</a></h3>
+          <details class="authors author-details">
+            <summary>Wei Huang, Bohan Zhang, <strong>Chenzhi Liu</strong><span class="more-authors"> +13 authors</span></summary>
+            <p>Isabella Liu, Shuai Yang, Weian Mao, Luozhou Wang, Yicheng Xiao, Weifeng Lin, Qixin Hu, Bryan Chu, Sifei Liu, Linxi Fan, Xiaojuan Qi, Song Han, Yukang Chen</p>
+          </details>
+          <p class="description">Long-WAM uses a longer history of camera observations to track motion and task progress while controlling a robot in real time.</p>
+          <div class="resources" aria-label="Long-WAM resources">
+            <a href="https://arxiv.org/abs/2610.10528">Paper</a><a href="https://nvlabs.github.io/LongLive/Long-WAM/">Project</a><a href="https://github.com/NVlabs/LongLive/tree/main/Long-WAM">Code</a>
+          </div>
+        </div>
+      </article>
+      <article class="publication" id="mg-nav">
+        <figure class="publication-figure">
+          <a class="publication-image" href="https://arxiv.org/html/2511.22609v1#S4.F4" aria-label="View the MG-Nav navigation example in Figure 4">
+            <video src="assets/mg-nav-demo.mp4" poster="assets/mg-nav.webp" muted loop playsinline preload="none" aria-label="Successive camera observations from the navigation episode in Figure 4"></video>
+          </a>
+        </figure>
+        <div class="publication-copy">
+          <p class="venue">arXiv · 2025</p>
+          <h3><a href="https://arxiv.org/abs/2511.22609">MG-Nav: Dual-Scale Visual Navigation via Sparse Spatial Memory</a></h3>
+          <p class="authors">Bo Wang, Jiehong Lin, <strong>Chenzhi Liu</strong>, Xinting Hu, Yifei Yu, Tianjia Liu, Zhongrui Wang, Xiaojuan Qi</p>
+          <p class="description">A robot remembers places it has seen, finds a route to a target shown in a photograph, and uses local geometry to navigate between waypoints.</p>
+          <div class="resources" aria-label="MG-Nav resources">
+            <a href="https://arxiv.org/abs/2511.22609">Paper</a>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section class="wrap experience" id="experience" aria-labelledby="experience-title">
+      <div class="section-head"><h2 id="experience-title">Experience</h2></div>
+      <div class="experience-entry">
+        <img class="experience-logo" src="assets/hku-crest.png" alt="">
+        <div>
+          <h3>Research Assistant</h3>
+          <p><a href="https://www.hku.hk/">The University of Hong Kong</a></p>
+          <p class="experience-dates"><time datetime="2026-05">May 2026</time> – <time datetime="2026-11">Nov 2026</time> · 7 months</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="contact">
+    <div class="wrap footer-inner">
+      <h2>Contact</h2>
+      <a class="email" href="mailto:kliuk@connect.hku.hk">kliuk@connect.hku.hk</a>
+    </div>
+  </footer>
+  <script src="previews.js"></script>
+</body>
+</html>
