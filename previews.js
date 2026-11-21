@@ -2,6 +2,7 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const connection = navigator.connection;
 const videos = Array.from(document.querySelectorAll("video[data-src]"));
 const visible = new Set();
+const fallbackDurationMs = 10_000;
 let active = null;
 let timer;
 let fallbackPoster;
@@ -53,14 +54,14 @@ function playPreview(video) {
       fallbackPoster = poster.getAttribute("src");
       poster.src = video.dataset.fallback;
     }
-    timer = setTimeout(advance, 4000);
+    timer = setTimeout(advance, fallbackDurationMs);
   });
 }
 
 function advance() {
   const choices = videos.filter(video => visible.has(video));
   if (choices.length === 1 && usingFallback && allowPlayback()) {
-    timer = setTimeout(advance, 4000);
+    timer = setTimeout(advance, fallbackDurationMs);
     return;
   }
   const index = choices.indexOf(active);
