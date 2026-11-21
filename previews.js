@@ -51,7 +51,11 @@ for (const video of document.querySelectorAll("video[data-preview-start]")) {
 function preparePreview(video) {
   video.poster = video.dataset.poster;
   const cover = video.parentElement.querySelector("img[data-motion]");
-  if (cover) cover.src = cover.dataset.motion;
+  if (cover) {
+    // Keep the embedded still painted while the browser swaps image sources.
+    cover.style.backgroundImage = 'url("' + cover.getAttribute("src") + '")';
+    cover.src = cover.dataset.motion;
+  }
 }
 
 function updatePlayback(video) {
