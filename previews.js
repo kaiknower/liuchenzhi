@@ -1,6 +1,6 @@
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-for (const video of document.querySelectorAll(".publication-image video")) {
+for (const video of document.querySelectorAll("video[muted][loop]")) {
   let visible = !("IntersectionObserver" in window);
 
   function updatePlayback() {
