@@ -106,6 +106,10 @@
         </li>
         <li>
           <time datetime="2026-11">Nov 2026</time>
+          <p>We introduced <a href="https://arxiv.org/abs/2611.34043">WISER-RL</a>, which lets a robot learn a new skill from a single human demonstration by alternating practice and learning, like waking and sleeping.</p>
+        </li>
+        <li>
+          <time datetime="2026-11">Nov 2026</time>
           <p>We introduced <a href="https://refocus-robotics.github.io/">ReFocus</a>, which rewards a robot for each subtask it completes and gives extra practice to the stage where it keeps failing.</p>
         </li>
         <li>
@@ -141,6 +145,22 @@
           <p class="description">When the robot policy fails, a coding agent writes and checks a repair. Each verified repair becomes a reusable skill and new training data, so the policy needs the agent less with each round.</p>
           <div class="resources" aria-label="RoboEvo² resources">
             <a href="https://arxiv.org/abs/2611.34675">Paper</a><a href="https://kaiknower.github.io/RoboEvo2/">Project</a><a href="https://github.com/kaiknower/RoboEvo2">Code</a><a href="https://huggingface.co/papers/2611.34675">Hugging Face</a>
+          </div>
+        </div>
+      </article>
+      <article class="publication" id="wiser-rl">
+        <figure class="publication-figure">
+          <a class="publication-image" href="https://arxiv.org/abs/2611.34043" aria-label="Read the WISER-RL paper on arXiv">
+            <img src="assets/wiser-rl-still.webp?v=b94b154d6f" width="384" height="216" loading="lazy" decoding="async" alt="">
+          </a>
+        </figure>
+        <div class="publication-copy">
+          <p class="venue">arXiv · 2026</p>
+          <h3><a href="https://arxiv.org/abs/2611.34043">WISER-RL: A Wake–Sleep Learning Mechanism for Robot Reinforcement Learning from One Demonstration</a></h3>
+          <p class="authors">Kwunhang Wong*, Yang Bai*, Qingyang Bao, Liudi Yang, <strong>Chenzhi Liu</strong>, Jiehong Lin, Wei Huang, Lin Li, Ziyuan Liu, Yujie Yang, Gitta Kutyniok, Zhongrui Wang, Xiaojuan Qi<span class="contribution">* Equal contribution</span></p>
+          <p class="description">Starting from one human demonstration, the robot alternates between practice and learning. While awake, a GPT controller takes over when the policy is unsure; while asleep, the policy learns from replayed successes and failures.</p>
+          <div class="resources" aria-label="WISER-RL resources">
+            <a href="https://arxiv.org/abs/2611.34043">Paper</a>
           </div>
         </div>
       </article>
