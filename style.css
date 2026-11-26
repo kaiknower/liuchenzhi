@@ -168,6 +168,8 @@ video.is-playing { opacity: 1; }
 .direction-card { container-type: inline-size; }
 .direction-card h3 { margin: 1rem 0 0; font-size: min(1.85rem, 7cqi); }
 .direction-card abbr { text-decoration: none; }
+.direction-card .resources { gap: 0 min(1rem, 3.4cqi); }
+.direction-card .resources a { font-size: clamp(.8rem, 4.15cqi, .9rem); }
 .direction-card .resources a[aria-current="true"] { text-decoration-thickness: .16em; text-underline-offset: .18em; }
 .news-list { list-style: none; margin: 0; padding: .55rem 0 0; }
 .news-list li {
@@ -232,11 +234,13 @@ footer { background: var(--paper); border-top: 1px solid var(--rule); }
 .last-updated { margin: .35rem 0 0; color: var(--muted); font-size: .875rem; }
 footer h2 { font-size: 2rem; }
 .email { color: var(--burgundy); font-size: 1.06rem; }
+@media (max-width: 1000px) {
+  .direction-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 850px) {
   .wrap { width: calc(100% - 4rem); }
   .intro-grid { gap: 2rem; padding-block: 2.75rem 3.3rem; }
   .publication { grid-template-columns: 26% 1fr; }
-  .direction-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bio-text { font-size: 1.05rem; }
   .signature { margin-bottom: 1.2rem; }
 }
