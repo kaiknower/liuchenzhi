@@ -20,24 +20,28 @@ function setupPreview(video) {
   const poster = video.previousElementSibling;
   const still = poster.getAttribute("src");
   const projectSeconds = Number(video.dataset.projectSeconds);
+  // data-next-fallback may list several space-separated images, one per later project.
+  const fallbacks = [video.dataset.fallback, ...(video.dataset.nextFallback || "").split(/\s+/)].filter(Boolean);
+  const card = video.closest(".direction-card");
+  const projectCount = card ? card.querySelectorAll(".resources a").length : 1;
   let running = false;
   let timer;
   let generation = 0;
 
   function syncProject() {
     if (projectSeconds && running && !video.paused) {
-      showProject(video, video.currentTime >= projectSeconds ? 1 : 0);
+      showProject(video, Math.min(Math.floor(video.currentTime / projectSeconds), projectCount - 1));
     }
   }
 
   function animateFallback(index) {
-    if (video.dataset.nextFallback) {
+    if (fallbacks.length > 1) {
       poster.onload = () => {
         showProject(video, index);
-        timer = setTimeout(() => animateFallback(1 - index), projectSeconds * 1000);
+        timer = setTimeout(() => animateFallback((index + 1) % fallbacks.length), projectSeconds * 1000);
       };
     }
-    poster.src = index === 0 ? video.dataset.fallback : video.dataset.nextFallback;
+    poster.src = fallbacks[index];
   }
 
   video.addEventListener("timeupdate", syncProject);

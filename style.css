@@ -165,7 +165,8 @@ nav a:hover, .resources a:hover { color: var(--burgundy); text-decoration: under
 .direction-preview img, .publication-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .direction-preview video, .publication-image video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; }
 video.is-playing { opacity: 1; }
-.direction-card h3 { margin: 1rem 0 0; }
+.direction-card { container-type: inline-size; }
+.direction-card h3 { margin: 1rem 0 0; font-size: min(1.85rem, 7cqi); }
 .direction-card abbr { text-decoration: none; }
 .direction-card .resources a[aria-current="true"] { text-decoration-thickness: .16em; text-underline-offset: .18em; }
 .news-list { list-style: none; margin: 0; padding: .55rem 0 0; }
