@@ -104,6 +104,10 @@
           <p>We released <a href="https://kaiknower.github.io/RoboEvo2/">RoboEvo²</a>. A robot’s policy and its coding agent improve each other: the agent repairs the policy’s failures, and the policy learns from the verified repairs.</p>
         </li>
         <li>
+          <time datetime="2026-11">Nov 2026</time>
+          <p>We introduced <a href="https://refocus-robotics.github.io/">ReFocus</a>, which rewards a robot for each subtask it completes and gives extra practice to the stage where it keeps failing.</p>
+        </li>
+        <li>
           <time datetime="2026-10">Oct 2026</time>
           <p>We released <a href="https://nvlabs.github.io/LongLive/Long-WAM/">Long-WAM</a>, a world-action model that uses a longer visual history for real-time robot control.</p>
         </li>
@@ -136,6 +140,23 @@
           <p class="description">When the robot policy fails, a coding agent writes and checks a repair. Each verified repair becomes a reusable skill and new training data, so the policy needs the agent less with each round.</p>
           <div class="resources" aria-label="RoboEvo² resources">
             <a href="https://arxiv.org/abs/2611.34675">Paper</a><a href="https://kaiknower.github.io/RoboEvo2/">Project</a><a href="https://github.com/kaiknower/RoboEvo2">Code</a><a href="https://huggingface.co/papers/2611.34675">Hugging Face</a>
+          </div>
+        </div>
+      </article>
+      <article class="publication" id="refocus">
+        <figure class="publication-figure">
+          <a class="publication-image" href="https://refocus-robotics.github.io/#project-video" aria-label="Watch the ReFocus project video">
+            <img src="assets/refocus-still.webp?v=d748b52a8b" width="384" height="216" loading="lazy" decoding="async" alt="">
+            <video data-src="assets/refocus-film.mp4?v=998a7861db" data-fallback="assets/refocus-motion.webp?v=784bc6ce4e" muted playsinline loop preload="none" aria-label="ReFocus highlights: a Unitree G1-D making toast, practice focused on a bottleneck stage, and bowl-stacking results"></video>
+          </a>
+        </figure>
+        <div class="publication-copy">
+          <p class="venue">arXiv · 2026</p>
+          <h3><a href="https://arxiv.org/abs/2611.32639">ReFocus: Progress-Guided Adaptive Practice for Long-Horizon Robotic Manipulation Reinforcement Learning</a></h3>
+          <p class="authors">Haoyuan Li, Wei Huang, Jiehong Lin, Shengrong Zhang, <strong>Chenzhi Liu</strong>, Shengchao Zhou, Hehe Fan, Xiaojuan Qi, Yi Yang</p>
+          <p class="description">Each long task is split into subtasks, so the robot earns reward for partial progress. ReFocus finds the stage where the policy keeps failing and gives that stage extra practice.</p>
+          <div class="resources" aria-label="ReFocus resources">
+            <a href="https://arxiv.org/abs/2611.32639">Paper</a><a href="https://refocus-robotics.github.io/">Project</a><a href="https://github.com/ReFocus-Robotics/ReFocus">Code</a><a href="https://huggingface.co/papers/2611.32639">Hugging Face</a>
           </div>
         </div>
       </article>
