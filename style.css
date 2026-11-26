@@ -156,8 +156,8 @@ nav a:hover, .resources a:hover { color: var(--burgundy); text-decoration: under
 .research, .news { padding-top: 2.85rem; }
 .direction-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1.25rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
   padding-top: 1.5rem;
 }
 .direction-preview, .publication-image { position: relative; display: block; aspect-ratio: 16 / 9; background: #272526; }
@@ -235,6 +235,7 @@ footer h2 { font-size: 2rem; }
   .wrap { width: calc(100% - 4rem); }
   .intro-grid { gap: 2rem; padding-block: 2.75rem 3.3rem; }
   .publication { grid-template-columns: 26% 1fr; }
+  .direction-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bio-text { font-size: 1.05rem; }
   .signature { margin-bottom: 1.2rem; }
 }

@@ -7,7 +7,7 @@
   <title>Chenzhi Liu | Robotics &amp; Embodied AI</title>
   <meta name="description" content="Chenzhi Liu studies robot learning, mobile manipulation, and visual navigation. He will begin his PhD at the University of Hong Kong in 2027.">
   <link rel="icon" href="assets/fox-transparent.png" type="image/png" sizes="56x56">
-  <link rel="stylesheet" href="style.css?v=f027f65b6a">
+  <link rel="stylesheet" href="style.css?v=012fe8aba9">
 </head>
 <body id="top">
   <a class="skip" href="#about">Skip to content</a>
@@ -65,12 +65,12 @@
         <div class="direction-card">
           <a class="direction-preview" href="https://kaiknower.github.io/mobiagent/" aria-label="View MobiAgent">
             <img src="assets/embodied-reel-still.webp?v=6a8dfb5103" width="512" height="288" loading="lazy" decoding="async" alt="">
-            <video data-src="assets/embodied-reel.mp4?v=33014feb2e" data-fallback="assets/embodied-reel-1-motion.webp?v=400932bbed" data-next-fallback="assets/embodied-reel-2-motion.webp?v=cb5c11ada4" data-project-seconds="5" muted playsinline loop preload="none" aria-label="MobiAgent and MG-Nav research highlights"></video>
+            <video data-src="assets/embodied-reel.mp4?v=035a25074b" data-fallback="assets/embodied-reel-1-motion.webp?v=ecbfcff017" data-next-fallback="assets/embodied-reel-2-motion.webp?v=99fdbf212c" data-project-seconds="5" muted playsinline loop preload="none" aria-label="MobiAgent and RoboEvo² research highlights"></video>
           </a>
           <h3>Embodied Agents &amp; <abbr title="Recursive Self-Improvement">RSI</abbr></h3>
           <div class="resources" aria-label="Embodied agent projects">
             <a href="https://kaiknower.github.io/mobiagent/" aria-current="true">MobiAgent</a>
-            <a href="https://huggingface.co/papers/2511.22609#692fc977da83d772a9d1e9ad">MG-Nav</a>
+            <a href="https://kaiknower.github.io/RoboEvo2/">RoboEvo²</a>
           </div>
         </div>
         <div class="direction-card">
@@ -84,18 +84,32 @@
             <a href="https://kaiknower.github.io/mobiagent/">MobiAgent</a>
           </div>
         </div>
+        <div class="direction-card">
+          <a class="direction-preview" href="https://huggingface.co/papers/2511.22609#692fc977da83d772a9d1e9ad" aria-label="View MG-Nav">
+            <img src="assets/navigation-reel-still.webp?v=f174ef56e8" width="512" height="288" loading="lazy" decoding="async" alt="">
+            <video data-src="assets/navigation-reel.mp4?v=d330c3ad72" data-fallback="assets/navigation-reel-motion.webp?v=6e0c5789c7" muted playsinline loop preload="none" aria-label="MG-Nav reaching image goals in three indoor scenes"></video>
+          </a>
+          <h3>Visual Navigation</h3>
+          <div class="resources" aria-label="Navigation projects">
+            <a href="https://huggingface.co/papers/2511.22609#692fc977da83d772a9d1e9ad" aria-current="true">MG-Nav</a>
+          </div>
+        </div>
       </div>
     </section>
     <section class="wrap news" id="news" aria-labelledby="news-title">
       <div class="section-head"><h2 id="news-title">News</h2></div>
       <ul class="news-list">
         <li>
+          <time datetime="2026-11">Nov 2026</time>
+          <p>We released <a href="https://kaiknower.github.io/RoboEvo2/">RoboEvo²</a>. A robot’s policy and its coding agent improve each other: the agent repairs the policy’s failures, and the policy learns from the verified repairs.</p>
+        </li>
+        <li>
           <time datetime="2026-10">Oct 2026</time>
           <p>We released <a href="https://nvlabs.github.io/LongLive/Long-WAM/">Long-WAM</a>, a world-action model that uses a longer visual history for real-time robot control.</p>
         </li>
         <li>
           <time datetime="2026-10">Oct 2026</time>
-          <p>Our CoRL 2026 paper <a href="https://kaiknower.github.io/mobiagent/">MobiAgent</a> is now on <a href="https://arxiv.org/abs/2610.03476">arXiv</a>. It shows how mobile robots can learn new skills from their own task attempts.</p>
+          <p>Our CoRL 2026 paper <a href="https://kaiknower.github.io/mobiagent/">MobiAgent</a> shows how mobile robots can learn new skills from their own task attempts.</p>
         </li>
         <li>
           <time datetime="2025-11">Nov 2025</time>
@@ -108,11 +122,28 @@
         <h2 id="publications-title">Publications</h2>
         <span class="year-range">2025–2026</span>
       </div>
+      <article class="publication" id="roboevo2">
+        <figure class="publication-figure">
+          <a class="publication-image" href="https://kaiknower.github.io/RoboEvo2/#hardware" aria-label="Watch the RoboEvo² real-robot demos">
+            <img src="assets/roboevo2-still.webp?v=88e933d7ce" width="384" height="216" loading="lazy" decoding="async" alt="">
+            <video data-src="assets/roboevo2-film.mp4?v=af7d50a14b" data-fallback="assets/roboevo2-motion.webp?v=03595dd497" muted playsinline loop preload="none" aria-label="RoboEvo² highlights: a coding agent repairs failed programs, and a Unitree G1-D opens a drawer"></video>
+          </a>
+        </figure>
+        <div class="publication-copy">
+          <p class="venue">arXiv · 2026</p>
+          <h3><a href="https://arxiv.org/abs/2611.34675">RoboEvo²: Recursive Robot Self-Improvement via Harness–Policy Co-Evolution</a></h3>
+          <p class="authors"><strong>Chenzhi Liu*</strong>, Jiehong Lin*, Wei Huang, Xuzhao Huang, Haoyuan Li, Yang Zhang, Junchao Huang, Chenyeyang Cai, Bo Wang, Kazuhiro Kosuge, Zhongrui Wang, Xiaojuan Qi<span class="contribution">* Equal contribution</span></p>
+          <p class="description">When the robot policy fails, a coding agent writes and checks a repair. Each verified repair becomes a reusable skill and new training data, so the policy needs the agent less with each round.</p>
+          <div class="resources" aria-label="RoboEvo² resources">
+            <a href="https://arxiv.org/abs/2611.34675">Paper</a><a href="https://kaiknower.github.io/RoboEvo2/">Project</a><a href="https://github.com/kaiknower/RoboEvo2">Code</a><a href="https://huggingface.co/papers/2611.34675">Hugging Face</a>
+          </div>
+        </div>
+      </article>
       <article class="publication" id="mobiagent">
         <figure class="publication-figure">
           <a class="publication-image" href="https://kaiknower.github.io/mobiagent/#demo-video" aria-label="Watch the narrated MobiAgent project video">
-            <img src="assets/mobiagent-still.webp" width="384" height="216" loading="lazy" decoding="async" alt="">
-            <video data-src="assets/mobiagent-film.mp4?v=0302cfe816" data-fallback="assets/mobiagent-motion.webp?v=c39a3a47f4" muted playsinline loop preload="none" aria-label="MobiAgent manipulating a bottle"></video>
+            <img src="assets/mobiagent-still.webp?v=caf54df992" width="384" height="216" loading="lazy" decoding="async" alt="">
+            <video data-src="assets/mobiagent-film.mp4?v=30adcc8108" data-fallback="assets/mobiagent-motion.webp?v=625deac31b" muted playsinline loop preload="none" aria-label="MobiAgent highlights: the dual-loop design and a mobile robot handling bottles"></video>
           </a>
         </figure>
         <div class="publication-copy">
@@ -128,8 +159,8 @@
       <article class="publication" id="long-wam">
         <figure class="publication-figure">
           <a class="publication-image" href="https://nvlabs.github.io/LongLive/Long-WAM/#film" aria-label="Watch the official Long-WAM film with sound">
-            <img src="assets/long-wam-still.webp" width="384" height="216" loading="lazy" decoding="async" alt="">
-            <video data-src="assets/long-wam-film.mp4?v=8465cb7ef3" data-fallback="assets/long-wam-motion.webp?v=c578dfb581" muted playsinline loop preload="none" aria-label="Long-WAM stacking cups on a conveyor"></video>
+            <img src="assets/long-wam-still.webp?v=1b0949abda" width="384" height="216" loading="lazy" decoding="async" alt="">
+            <video data-src="assets/long-wam-film.mp4?v=b40c38ceb9" data-fallback="assets/long-wam-motion.webp?v=5e6518c8a3" muted playsinline loop preload="none" aria-label="Long-WAM highlights: stacking cups on a conveyor and long-horizon tabletop tasks"></video>
           </a>
         </figure>
         <div class="publication-copy">
