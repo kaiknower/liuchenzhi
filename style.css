@@ -204,6 +204,8 @@ h3 a:hover { color: var(--burgundy); }
 .authors { color: var(--muted); font-size: .94rem; line-height: 1.55; margin: 0; }
 .authors strong { font-weight: 700; color: var(--ink); }
 .contribution { display: block; font-size: .8rem; margin-top: .12rem; }
+.authors sup { font-size: .68em; line-height: 0; margin-left: .06em; }
+.contribution sup { margin: 0 .14em 0 0; }
 .description { color: #49454a; margin: .75rem 0 .2rem; }
 .resources { display: flex; flex-wrap: wrap; gap: 0 1.4rem; }
 .resources a { color: var(--burgundy); font-weight: 650; }
