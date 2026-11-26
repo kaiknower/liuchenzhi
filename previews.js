@@ -20,6 +20,8 @@ function setupPreview(video) {
   const poster = video.previousElementSibling;
   const still = poster.getAttribute("src");
   const projectSeconds = Number(video.dataset.projectSeconds);
+  // data-cover-seconds holds the still (a title cover) on screen before each play-through.
+  const coverMs = (Number(video.dataset.coverSeconds) || 0) * 1000;
   // data-next-fallback may list several space-separated images, one per later project.
   const fallbacks = [video.dataset.fallback, ...(video.dataset.nextFallback || "").split(/\s+/)].filter(Boolean);
   const card = video.closest(".direction-card");
@@ -51,6 +53,15 @@ function setupPreview(video) {
       video.classList.add("is-playing");
     }
   });
+  // Only videos without the loop attribute end: show the cover again, then replay.
+  video.addEventListener("ended", () => {
+    if (!running) return;
+    video.classList.remove("is-playing");
+    const request = generation;
+    timer = setTimeout(() => {
+      if (generation === request) video.play().catch(() => {});
+    }, coverMs);
+  });
 
   return function refreshPreview() {
     const wanted = visible.has(video) && !document.hidden && !reducedMotion.matches && !connection?.saveData;
@@ -74,7 +85,7 @@ function setupPreview(video) {
       video.play().catch(() => {
         if (generation === request && video.paused && video.dataset.fallback) animateFallback(0);
       });
-    }, 120);
+    }, Math.max(120, coverMs));
   };
 }
 
